@@ -2,29 +2,33 @@
 #define SIMULATOR_H
 
 #include <vector>
-#include "Node.h"
-#include "Connection.h"
 #include "Gate.h"
 
 class Simulator {
 private:
-    std::vector<Node*> nodes;
-    std::vector<Connection*> connections;
+    std::vector<Gate> gates;
+    std::vector<Wire> wires;
+    bool simPlaying;
+    double simAccum;
 
 public:
+    Simulator();
     ~Simulator();
 
-    void AddNode(Node* node);
-    void RemoveNode(Node* node);
-    void AddConnection(Connection* conn);
-    void RemoveConnection(Connection* conn);
+    std::vector<Gate>& GetGates() { return gates; }
+    std::vector<Wire>& GetWires() { return wires; }
 
-    std::vector<Node*>& GetNodes() { return nodes; }
-    std::vector<Connection*>& GetConnections() { return connections; }
+    void AddGate(const Gate& gate);
+    void RemoveGate(int idx);
+    void AddWire(const Wire& wire);
+    void RemoveWire(int idx);
+    void DeleteGate(int idx);
 
-    void Simulate();
     void Propagate();
-    void DrawAll() const;
+    void TogglePlay() { simPlaying = !simPlaying; }
+    bool IsPlaying() const { return simPlaying; }
+
+    void DrawAll(bool panning, const Camera2D& cam);
 };
 
 #endif

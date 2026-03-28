@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -Wall -I/usr/include -L/usr/lib
 LDFLAGS = -lraylib -lGL -lm -lpthread
 TARGET = logic_gates
-SRC = src/main.cpp src/Node.cpp src/Gate.cpp src/Connection.cpp src/Simulator.cpp
+SRC = src/main.cpp src/Simulator.cpp
 
 all: $(TARGET)
 
